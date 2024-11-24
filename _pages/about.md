@@ -9,8 +9,7 @@ profile:
   image: Imagephoto.PNG
   image_circular: false # crops the image to make it circular
   more_info: >
-    
-    
+
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
@@ -31,7 +30,6 @@ Here, I aim to present a multifaceted view of myself, from my CV and publication
 </div>
 
 <br>
-
 
 <!--
 <a href="/assets/pdf/my_cv.pdf"><i class="ai ai-cv-square ai-2x"></i></a>

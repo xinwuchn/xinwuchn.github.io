@@ -45,7 +45,9 @@
       "startDate": "2019-09-01",
       "endDate": "2023-12-10",
       "score": "10",
-      "courses": ["Mechanism and modulation of phonon thermal transport of two-dimensional materials and their heterostructures"]
+      "courses": [
+        "Mechanism and modulation of phonon thermal transport of two-dimensional materials and their heterostructures"
+      ]
     },
     {
       "institution": "<a href=\"https://www.nlab.iis.u-tokyo.ac.jp/\">Nomura Lab</a>, Institute of Industrial Science, The University of Tokyo",

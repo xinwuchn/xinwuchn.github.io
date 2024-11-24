@@ -1,6 +1,6 @@
 {% if site.enable_math and page.pseudocode %}
   <!-- MathJax -->
-  <script type="text/javascript">
+  <script type='text/javascript'>
     window.MathJax = {
       tex: {
         inlineMath: [
@@ -17,17 +17,17 @@
     };
   </script>
   <script
-    type="text/javascript"
-    id="MathJax-script"
-    src="{{ site.third_party_libraries.mathjax.url.js }}"
-    integrity="{{ site.third_party_libraries.mathjax.integrity.js }}"
-    crossorigin="anonymous"
+    type='text/javascript'
+    id='MathJax-script'
+    src='{{ site.third_party_libraries.mathjax.url.js }}'
+    integrity='{{ site.third_party_libraries.mathjax.integrity.js }}'
+    crossorigin='anonymous'
   ></script>
   <script
-    type="text/javascript"
-    src="{{ site.third_party_libraries.pseudocode.url.js }}"
-    integrity="{{ site.third_party_libraries.pseudocode.integrity.js }}"
-    crossorigin="anonymous"
+    type='text/javascript'
+    src='{{ site.third_party_libraries.pseudocode.url.js }}'
+    integrity='{{ site.third_party_libraries.pseudocode.integrity.js }}'
+    crossorigin='anonymous'
   ></script>
   <script>
     document.addEventListener('readystatechange', () => {

@@ -1,9 +1,9 @@
 {% if page.code_diff %}
   <!-- diff2html doesn't go well with Bootstrap Table -->
   <script
-    src="{{ site.third_party_libraries.diff2html.url.js }}"
-    integrity="{{ site.third_party_libraries.diff2html.integrity.js }}"
-    crossorigin="anonymous"
+    src='{{ site.third_party_libraries.diff2html.url.js }}'
+    integrity='{{ site.third_party_libraries.diff2html.integrity.js }}'
+    crossorigin='anonymous'
   ></script>
   <script>
     let diff2HtmlTheme = determineComputedTheme();

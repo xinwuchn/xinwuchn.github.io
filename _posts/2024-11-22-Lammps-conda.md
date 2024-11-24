@@ -24,31 +24,33 @@ conda activate YOUR_NAME
 ```shell
 pip install lammps
 ```
+
 Note that you must ensure that the pip package exists in the conda environment itself, which can be viewed through `conda list`.
 
 ###### **3. Test your installation**
 
 Prepare a simple lammps in.lj file:
+
 ```text
 # LAMMPS input script - in.lj
-  
+
 # Initialization
 clear
 units lj
 dimension 3
 atom_style atomic
-  
+
 # Atom definition
 lattice fcc 1.0
 region box block 0 10 0 10 0 10 units lattice
 create_box 1 box
 create_atoms 1 box
 mass 1 1.0
-    
+
 # Potential
 pair_style lj/cut 2.5
 pair_coeff 1 1 1.0 1.0 2.5
-    
+
 # Run
 run 1000
 ```
@@ -69,8 +71,6 @@ lmp.file("in.lj")
 <div class="caption">
     If you get this result, congratulations! 🎉 🎉 🎉.
 </div>
-
-
 
 ###### **5. Exit the test environment**
 
