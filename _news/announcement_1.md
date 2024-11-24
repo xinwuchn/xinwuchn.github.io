@@ -1,8 +1,20 @@
 ---
 layout: post
-date: 2015-10-22 15:59:00-0400
+date: 2024-09-04
 inline: true
 related_posts: false
 ---
 
-A simple inline announcement.
+Start to configure my homepage! 
+
+
+
+<!-- A simple inline announcement with Markdown emoji! :sparkles: :smile: -->
+
+<!-- 
+layout: post
+title: A long announcement with details
+date: 2015-11-07
+inline: false
+related_posts: false
+-->
