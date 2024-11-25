@@ -6,7 +6,7 @@ description: What to do if you forget your login PIN code in Windows system？
 tags: guidance
 categories: Research
 featured: false
-thumbnail: assets/img/WinPIN.png
+thumbnail: assets/img/WinPin.png
 toc:
   sidebar: false
 giscus_comments: false
