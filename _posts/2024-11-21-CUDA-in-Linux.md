@@ -3,7 +3,7 @@ layout: post
 title: How to install CUDA in Linux?
 date: 2024-11-21
 description: The guidance is for installing CUDA within Linux system, and the further GPU computing.
-tags: guidance
+tags: Guidance
 categories: Research
 featured: false
 thumbnail: assets/img/CUDA.png

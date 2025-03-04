@@ -3,7 +3,7 @@ layout: post
 title: Install lammps in conda environment
 date: 2024-11-22
 description: Do some simple lammps test in conda environment.
-tags: guidance
+tags: Guidance
 categories: Research
 featured: false
 thumbnail: assets/img/Lammpsconda.png

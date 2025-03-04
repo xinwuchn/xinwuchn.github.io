@@ -309,7 +309,7 @@ jekyll-archives:
     tag: '/blog/tag/:name/'
     category: '/blog/category/:name/'
 
-display_tags: ['MD', 'DFT', 'guidance'] # these tags will be displayed on the front page of your blog
+display_tags: ['MD', 'DFT', 'Guidance'] # these tags will be displayed on the front page of your blog
 display_categories: ['Research', 'Work', 'Personal'] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------

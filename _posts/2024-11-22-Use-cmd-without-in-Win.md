@@ -3,7 +3,7 @@ layout: post
 title: Run CMD on Win system without entering it
 date: 2024-11-22
 description: What to do if you forget your login PIN code in Windows system？
-tags: guidance
+tags: Guidance
 categories: Research
 featured: false
 thumbnail: assets/img/WinPin.png

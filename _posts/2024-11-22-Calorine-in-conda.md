@@ -3,7 +3,7 @@ layout: post
 title: Install calorine on conda-MacOS
 date: 2024-11-22
 description: If you have problems installing calorine on MacOS, please see here.
-tags: guidance
+tags: Guidance
 categories: Research
 featured: false
 thumbnail: assets/img/calorinelogo.png
@@ -11,6 +11,11 @@ toc:
   sidebar: false
 giscus_comments: false
 ---
+
+> ##### Update
+> The bug was fixed in the version 3.0 of calorine. Now you can directly install it by pip!
+{: .block-warning }
+
 
 > MacOS14.5 + Python 3.10 + conda: The error always shows that it is a problem with C++ compilation, which may be related to the c++ compiler of the MacOS system.
 
