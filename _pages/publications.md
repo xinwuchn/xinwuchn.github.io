@@ -11,7 +11,7 @@ nav_order: 2
 <div class="publications">
 
 <p>
-* : Equal contribution  †: Corresponding  author.
+† : Equal contribution  * : Corresponding  author.
 </p>
 
 {% bibliography %}
