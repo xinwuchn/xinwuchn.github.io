@@ -14,6 +14,6 @@ nav_order: 2
 † : Equal contribution  * : Corresponding  author.
 </p>
 
-{% bibliography %}
+{% bibliography --sort_by year,month --order descending %}
 
 </div>
