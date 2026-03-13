@@ -16,7 +16,7 @@ social: false # includes social icons at the bottom of the page
 nav_order: 1
 ---
 
-<div style="line-height: 1.3;">
+<div style="line-height: 1.5;">
 I work on the thermophysical properties of nanomaterials, with a particular focus on understanding and engineering thermal transport in <strong>2D materials and their heterostructures</strong>.
 <br><br>
 My research combines <strong>molecular dynamics simulations with machine-learned potentials</strong> and <strong>first-principles calculations</strong> to uncover the microscopic mechanisms behind heat flow — and to design materials with tailored thermal behaviors for next-generation electronic and energy devices.
