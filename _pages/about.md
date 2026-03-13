@@ -16,17 +16,14 @@ social: false # includes social icons at the bottom of the page
 nav_order: 1
 ---
 
-<div style="line-height: 1.8;">
-I am specializing in the thermophysical properties of nanomaterials.
-<br>
-<br>
-<strong>Currently</strong>, my focus is on enhancing the understanding and control of thermal transport in nanomaterials, particularly <strong>2D materials and their heterostructures</strong>. My expertise lies in developing and applying <strong>molecular dynamics simulations with machine-learned potentials</strong> and <strong>first principles calculation</strong> to explore and optimize thermal transport properties. This research seeks to unlock new possibilities for thermal management in electronic and energy devices by designing materials with customized thermal behaviors.
-<br>
-<br>
-I received my <b>Ph.D. degree in Solid Mechanics</b> from the South China University of Technology (SCUT) in 2023, under the mentorship of Prof. Qiang Han. During my studies, I enriched my experience through a one-year visiting Ph.D. position at the Institute of Industrial Science, the University of Tokyo (UTokyo), where I was under the guidance of Prof. Masahiro Nomura.
-<br>
-<br>
-Here, I aim to present a multifaceted view of myself, from my CV and publication list to a blog where I record and share my thoughts and experiences. Welcome to you and your comments! 🤗
+<div style="line-height: 1.3;">
+I work on the thermophysical properties of nanomaterials, with a particular focus on understanding and engineering thermal transport in <strong>2D materials and their heterostructures</strong>.
+<br><br>
+My research combines <strong>molecular dynamics simulations with machine-learned potentials</strong> and <strong>first-principles calculations</strong> to uncover the microscopic mechanisms behind heat flow — and to design materials with tailored thermal behaviors for next-generation electronic and energy devices.
+<br><br>
+I received my <strong>Ph.D. in Solid Mechanics</strong> from the South China University of Technology (SCUT) in 2023, advised by Prof. Qiang Han. Along the way, I spent a year as a visiting Ph.D. researcher at the Institute of Industrial Science, the University of Tokyo, working with Prof. Masahiro Nomura — an experience that shaped much of how I think about this field.
+<br><br>
+This site is where I share my work, thoughts, and occasional notes from the research trenches. Feel free to look around, and don't hesitate to reach out! 🤗
 </div>
 
 <br>
