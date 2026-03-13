@@ -6,7 +6,7 @@ subtitle: JSPS Postdoctoral Research Fellow @ The University of Tokyo
 
 profile:
   align: right
-  image: Imagephoto.PNG
+  image: Imagephoto.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
 
@@ -16,7 +16,7 @@ social: false # includes social icons at the bottom of the page
 nav_order: 1
 ---
 
-<div style="text-align: justify;">
+<div style="line-height: 1.8;">
 I am specializing in the thermophysical properties of nanomaterials.
 <br>
 <br>
