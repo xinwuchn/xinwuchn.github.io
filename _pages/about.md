@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: JSPS Postdoctoral Research Fellow @ The University of Tokyo
+subtitle: Project Research Associate @ The University of Tokyo
 
 profile:
   align: right
