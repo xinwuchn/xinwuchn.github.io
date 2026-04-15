@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '~> 3.1.0'
 gem 'connection_pool', '< 3.0'
 group :jekyll_plugins do
     gem 'classifier-reborn'

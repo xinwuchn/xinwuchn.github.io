@@ -1,0 +1,150 @@
+# Conference presentations.
+#
+# Fields:
+#   type        (required) one of: invited | contributed | poster
+#   title       (required) title of your talk/poster
+#   conference  (required) full conference name
+#   location    (required) city, country
+#   date        (required) YYYY-MM-DD (day can be 01 if unknown)
+#   year        (required) used for grouping — usually matches `date`
+#   lat, lng    (optional) decimal coordinates, shown on the world map
+#               Get them from https://www.latlong.net/ or right-click in Google Maps.
+#   url         (optional) link to the conference or talk page
+#   slides      (optional) path to slides PDF, e.g. /assets/pdf/talks/xxx.pdf
+#   authors     (optional) author list as a single string
+#   abstract    (optional) short description shown in italics
+#
+# Add newest entries first — the page sorts by date (desc) automatically.
+# Uncomment and edit the template below to add your first entry.
+
+
+
+- type: contributed
+  title: "Phonon coherence in disordered superlattices revealed by machine-learned molecular dynamics"
+  conference: "Materials Research Meeting 2025"
+  location: "Yokohama, Japan 🇯🇵"
+  date: 2025-12-11
+  year: 2025
+  lat: 35.4628
+  lng: 139.6352
+  url: https://mrm2025.mrs-j.org
+  authors: "Xin Wu, Zheyong Fan, Penghua Ying, Masahiro Nomura"
+
+
+- type: contributed
+  title: "Machine-learned molecular dynamics uncover phonon coherence and lower bounds of thermal transport in disordered superlattices"
+  conference: "The 86th JSAP Autumn Meeting"
+  location: "Nagoya, Japan 🇯🇵"
+  date: 2025-09-7
+  year: 2025
+  lat: 35.1347
+  lng: 136.9754
+  url: https://meeting.jsap.or.jp/archive/jsap2025a/english/
+  authors: "Xin Wu, Zheyong Fan, Penghua Ying, Masahiro Nomura"
+
+
+- type: contributed
+  title: "Phonon coherence effects in random superlattices (随机超晶格中的声子相干效应)"
+  conference: "The 1st GPUMD Developer Conference and AI Molecular Dynamics Frontier Seminar (第一届GPUMD开发者大会暨AI分子动力学前沿研讨会)"
+  location: "Ningbo, Zhejiang, China 🇨🇳"
+  date: 2025-06-30
+  year: 2025
+  lat: 29.8683
+  lng: 121.5440
+  authors: "Xin Wu, Zhang Wu, Ting Liang, Penghua Ying, Zheyong Fan, Jianbin Xu, Masahiro Nomura"
+
+
+- type: contributed
+  title: "Phonon coherence and minimum thermal conductivity in disordered superlattices: Machine-learned molecular dynamics insights"
+  conference: "The 9th Phonon Engineering Workshop"
+  location: "Miyakojima, Okinawa, Japan 🇯🇵"
+  date: 2025-05-18
+  year: 2025
+  lat: 24.7253
+  lng: 125.2567
+  url: https://www.phonon.t.u-tokyo.ac.jp/phonon_engineering/2025/home_en.html
+  authors: "Xin Wu, Masahiro Nomura"
+
+
+- type: poster
+  title: "Designing nanoscale thermal transport structures through mathematical principles"
+  conference: "2025 MRS Spring Meeting & Exhibit"
+  location: "Seattle, Washington, USA 🇺🇸"
+  date: 2025-04-11
+  year: 2025
+  lat: 47.6113
+  lng: -122.3322
+  url: https://www.mrs.org/meetings-events/annual-meetings/archive/meeting/2025-mrs-spring-meeting
+  authors: "Xin Wu, Xin Huang, Yunhui Wu, Zheyong Fan, Sebastian Volz, Qiang Han, Masahiro Nomura"
+
+
+- type: invited
+  title: "Mathematically inspired structure design in nanoscale thermal transport (POSTER)"
+  conference: "The 1st A3 Nano & Thermal Energy Engineering Workshop"
+  location: "Hongo, Tokyo, Japan 🇯🇵"
+  date: 2025-01-14
+  year: 2025
+  lat: 35.7126
+  lng: 139.7619
+  url: https://www.phonon.t.u-tokyo.ac.jp/en/news/「the-1st-a3-nano-thermal-energy-engineering-workshop」が盛況のうちに開催！/
+  authors: "Xin Wu, Xin Huang, Yunhui Wu, Zheyong Fan, Sebastian Volz, Qiang Han, Masahiro Nomura"
+
+
+- type: contributed
+  title: "Optimizing cryogenic graphene: how Golomb ruler-designed isotope interfaces suppress thermal transport"
+  conference: "The 85th JSAP Autumn Meeting"
+  location: "Niigata, Japan 🇯🇵"
+  date: 2024-09-17
+  year: 2024
+  lat: 37.9548
+  lng: 139.0681
+  url: https://meeting.jsap.or.jp/archive/jsap2024a/english/
+  authors: "Xin Wu, Zheyong Fan, Sebastian Volz, Qiang Han, Masahiro Nomura"
+
+
+- type: poster
+  title: "Isotope Interface Engineering for Effective Suppression of Thermal Transport in Cryogenic Graphene (同位素界面工程实现极低温石墨烯的热输运高效抑制)"
+  conference: "The 1st GPUMD&NEP academic seminar (第一届GPUMD&NEP学术研讨会)"
+  location: "Jinzhou, Liaoning, China 🇨🇳"
+  date: 2024-07-13
+  year: 2024
+  lat: 41.1079
+  lng: 121.1277
+  url: https://www.phonon.t.u-tokyo.ac.jp/phonon_engineering/2024/home_en.html
+  authors: "Xin Wu, Yunhui Wu, Xin Huang, Zheyong Fan, Sebastian Volz, Qiang Han, Masahiro Nomura"
+
+
+- type: contributed
+  title: "Enhancing cryogenic thermal management of graphene through Golomb ruler-designed isotope interfaces"
+  conference: "The 8th Phonon Engineering Workshop"
+  location: "Miyakojima, Okinawa, Japan 🇯🇵"
+  date: 2024-05-17
+  year: 2024
+  lat: 24.7253
+  lng: 125.2567
+  url: https://www.phonon.t.u-tokyo.ac.jp/phonon_engineering/2024/home_en.html
+  authors: "Xin Wu, Yunhui Wu, Xin Huang, Zheyong Fan, Sebastian Volz, Qiang Han, Masahiro Nomura"
+
+
+- type: contributed
+  title: "Suppressed thermal transport in mathematically inspired 2D heterosystems"
+  conference: "The 84th JSAP Autumn Meeting"
+  location: "Kumamoto, Japan 🇯🇵"
+  date: 2023-09-22
+  year: 2023
+  lat: 32.8045
+  lng: 130.7074
+  url: https://meeting.jsap.or.jp/archive/jsap2023a/english/
+  authors: "Xin Wu, Xin Huang, Lei Yang, Zhongwei Zhang, Yangyu Guo, Sebastian Volz, Qiang Han, Masahiro Nomura"
+
+
+- type: poster
+  title: "Suppressed thermal transport in mathematically inspired 2D heterosystems"
+  conference: "The 7th Phonon Engineering Workshop"
+  location: "Okinawa, Japan 🇯🇵"
+  date: 2023-08-04
+  year: 2023
+  lat: 26.3050
+  lng: 127.7292
+  url: https://www.phonon.t.u-tokyo.ac.jp/phonon_engineering/2023/home_en.html
+  authors: "Xin Wu, Xin Huang, Lei Yang, Zhongwei Zhang, Yangyu Guo, Sebastian Volz, Qiang Han, Masahiro Nomura"
