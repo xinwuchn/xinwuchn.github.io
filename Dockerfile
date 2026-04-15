@@ -1,7 +1,7 @@
-FROM ruby:latest
+FROM ruby:3.3
 ENV DEBIAN_FRONTEND noninteractive
 
-Label MAINTAINER Amir Pourmand
+LABEL maintainer="Amir Pourmand"
 
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
     locales \
@@ -24,7 +24,6 @@ ENV LANG=en_US.UTF-8 \
 
 RUN mkdir /srv/jekyll
 
-ADD Gemfile.lock /srv/jekyll
 ADD Gemfile /srv/jekyll
 
 WORKDIR /srv/jekyll

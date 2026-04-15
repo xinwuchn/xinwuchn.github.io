@@ -50,7 +50,12 @@
   <!-- Entry bib key -->
   <div id='{{ entry.key }}' class='{% if site.enable_publication_thumbnails %}col-sm-8{% else %}col-sm-10{% endif %}'>
     <!-- Title -->
-    <div class='title'>{{ entry.title }}</div>
+    <div class='title'>
+      {{ entry.title }}
+      {% if entry.selected == "true" %}
+        <span class="featured-badge" title="Featured publication">★ Featured</span>
+      {% endif %}
+    </div>
     <!-- Author -->
     <div class='author'>
       {% assign author_array_size = entry.author_array | size %}
@@ -268,6 +273,18 @@
       {% endif %}
       {% if entry.website %}
         <a href='{{ entry.website }}' class='btn btn-sm z-depth-0' role='button'>Website</a>
+      {% endif %}
+      {% if entry.doi %}
+        {% assign _doi = entry.doi | downcase %}
+        {% assign _cite_count = site.data.citations.counts[_doi] %}
+        {% if _cite_count %}
+          {% if entry.google_scholar_id %}
+            {% capture _cite_url %}https://scholar.google.com/citations?view_op=view_citation&hl=en&user={{ site.scholar_userid }}&citation_for_view={{ site.scholar_userid }}:{{ entry.google_scholar_id }}{% endcapture %}
+          {% else %}
+            {% capture _cite_url %}https://scholar.google.com/scholar?q={{ entry.doi | url_encode }}{% endcapture %}
+          {% endif %}
+          <a href='{{ _cite_url }}' class='btn btn-sm z-depth-0 cite-count' role='button' title='View on Google Scholar' target='_blank' rel='noopener'>Citations<strong>{{ _cite_count }}</strong></a>
+        {% endif %}
       {% endif %}
     </div>
     {% if site.enable_publication_badges %}
