@@ -72,7 +72,7 @@ jobs:
         with:
           ruby-version: '3.3'
           bundler-cache: true
-          cache-version: 250708
+          cache-version: 2
       - name: Update _config.yml ⚙️
         uses: fjogeleit/yaml-update-action@main
         with:
