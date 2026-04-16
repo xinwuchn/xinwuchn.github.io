@@ -107,9 +107,9 @@ nav_order: 3
   const map = L.map('presentations-map', { scrollWheelZoom: false }).setView([20, 10], 2);
   map.on('click', function () { map.scrollWheelZoom.enable(); });
   map.on('mouseout', function () { map.scrollWheelZoom.disable(); });
-  L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
-    attribution: 'Wikimedia maps | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    maxZoom: 18
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
   }).addTo(map);
   const colorMap = { invited: '#b31b1b', contributed: '#0d6efd', poster: '#6c757d' };
   const typeRank = { invited: 0, contributed: 1, poster: 2 };
