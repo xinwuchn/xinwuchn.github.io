@@ -17,6 +17,16 @@
 # Add newest entries first — the page sorts by date (desc) automatically.
 # Uncomment and edit the template below to add your first entry.
 
+- type: invited
+  title: "equence engineering for tuning phonon thermal transport in two-dimensional materials"
+  conference: "The 10th Phonon Engineering Workshop"
+  location: "Miyakojima, Okinawa, Japan 🇯🇵"
+  date: 2026-05-10
+  year: 2026
+  lat: 24.7253
+  lng: 125.2567
+  url: https://www.phonon.t.u-tokyo.ac.jp/phonon_engineering/2026/home.html
+  authors: "Xin Wu, Masahiro Nomura"
 
 
 - type: contributed
