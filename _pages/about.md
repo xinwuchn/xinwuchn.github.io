@@ -17,7 +17,8 @@ nav_order: 1
 ---
 
 <div style="line-height: 1.5;">
-I work in <strong>computational physical chemistry</strong>, with a particular focus on thermophysical properties, heat transfer, and thermal management in functional materials.
+I work in <strong>computational physical chemistry</strong>, with a particular focus on thermophysical properties, heat transfer, and thermal management in 
+functional materials.
 <br><br>
 My research combines molecular dynamics simulations, machine-learned interatomic potentials, and first-principles calculations to understand how heat, ions, 
 and interfacial structures interact at the atomic scale. I am especially interested in semiconductor materials, energy materials, two-dimensional materials, 
