@@ -1,6 +1,42 @@
 ---
 ---
-<div class='row'>
+{%- comment -%}
+  Determine Xin Wu's authorship role in this entry so the publications page can
+  filter by it. Markers in the bibtex author names encode the role:
+    *  -> corresponding author
+    †  -> equal (co-first) contribution
+  Position in the author list determines (sole) first authorship.
+{%- endcomment -%}
+{% assign role_first = false %}
+{% assign role_cofirst = false %}
+{% assign role_corresponding = false %}
+{% assign self_found = false %}
+{%- for author in entry.author_array -%}
+  {%- assign a_last_clean = author.last | regex_replace: '[*∗†‡§¶‖&^]', '' -%}
+  {%- if site.scholar.last_name contains a_last_clean and site.scholar.first_name contains author.first -%}
+    {% assign self_found = true %}
+    {%- if forloop.first -%}
+      {% assign role_first = true %}
+    {%- else -%}
+      {%- if author.last contains '*' or author.last contains '∗' -%}
+        {% assign role_corresponding = true %}
+      {%- endif -%}
+      {%- if author.last contains '†' or author.last contains '‡' -%}
+        {% assign role_cofirst = true %}
+      {%- endif -%}
+    {%- endif -%}
+    {% break %}
+  {%- endif -%}
+{%- endfor -%}
+{% assign author_roles = '' %}
+{% if role_first %}{% assign author_roles = author_roles | append: ' role-first' %}{% endif %}
+{% if role_cofirst %}{% assign author_roles = author_roles | append: ' role-cofirst' %}{% endif %}
+{% if role_corresponding %}{% assign author_roles = author_roles | append: ' role-corresponding' %}{% endif %}
+{% if self_found and role_first == false and role_cofirst == false and role_corresponding == false %}
+  {% assign author_roles = author_roles | append: ' role-collaborator' %}
+{% endif %}
+{% assign author_roles = author_roles | strip %}
+<div class='row publication-entry {{ author_roles }}' data-author-role='{{ author_roles }}'>
   {% if site.enable_publication_thumbnails %}
     <div class='col col-sm-2 abbr'>
       {%- if entry.abbr -%}
