@@ -17,9 +17,11 @@ nav_order: 1
 ---
 
 <div style="line-height: 1.5;">
-I work on the thermophysical properties of nanomaterials, with a particular focus on understanding and engineering thermal transport in <strong>2D materials and their heterostructures</strong>.
+I work in <strong>computational physical chemistry</strong>, with a particular focus on thermophysical properties, heat transfer, and thermal management in functional materials.
 <br><br>
-My research combines <strong>molecular dynamics simulations with machine-learned potentials</strong> and <strong>first-principles calculations</strong> to uncover the microscopic mechanisms behind heat flow — and to design materials with tailored thermal behaviors for next-generation electronic and energy devices.
+My research combines molecular dynamics simulations, machine-learned interatomic potentials, and first-principles calculations to understand how heat, ions, 
+and interfacial structures interact at the atomic scale. I am especially interested in semiconductor materials, energy materials, two-dimensional materials, 
+and their heterostructures, where nanoscale heat transfer plays a critical role in device performance, reliability, and safety.
 <br><br>
 I received my <strong>Ph.D. in Solid Mechanics</strong> from the South China University of Technology (SCUT) in 2023, advised by Prof. Qiang Han. Along the way, I spent a year as a visiting Ph.D. researcher at the Institute of Industrial Science, the University of Tokyo, working with Prof. Masahiro Nomura — an experience that shaped much of how I think about this field.
 <br><br>

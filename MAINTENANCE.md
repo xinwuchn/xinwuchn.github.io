@@ -111,7 +111,7 @@ docker run --rm -p 8080:8080 -v "$PWD:/srv/jekyll" xinwuchn-site
 ### 2.6 更新 CV
 
 - 模式一：**通过 YAML 数据文件**（推荐）
-  - 编辑 `_data/cv.yml`，页面会自动渲染
+  - 编辑 `assets/json/resume.json`，页面会自动渲染
 - 模式二：**直接 PDF**
   - 把 PDF 放 `assets/pdf/my_cv.pdf`，在 `_pages/cv.md` frontmatter 设 `cv_pdf: my_cv.pdf`
 
