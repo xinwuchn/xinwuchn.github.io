@@ -18,6 +18,18 @@
 # Uncomment and edit the template below to add your first entry.
 
 - type: invited
+  title: "Programmable flipping engineering for high thermal anisotropy in Janus MoSSe stacks (POSTER)"
+  conference: "The 11th US-Japan Joint Seminar on Nanoscale Transport Phenomena"
+  location: "Tokyo, Japan 🇯🇵"
+  date: 2026-06-25
+  year: 2026
+  lat: 35.7126
+  lng: 139.7619
+  url: https://sites.google.com/view/usj2026/home
+  authors: "Xin Wu, Masahiro Nomura"
+
+
+- type: invited
   title: "Sequence engineering for tuning phonon thermal transport in two-dimensional materials"
   conference: "The 10th Phonon Engineering Workshop"
   location: "Miyakojima, Okinawa, Japan 🇯🇵"
