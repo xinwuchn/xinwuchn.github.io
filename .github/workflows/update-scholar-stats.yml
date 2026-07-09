@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Fetch profile metrics 📊
+      - name: Fetch profile metrics and per-article citations 📊
         id: fetch
         continue-on-error: true
         env:
@@ -38,10 +38,10 @@ jobs:
       - name: Commit if changed 💾
         id: commit
         run: |
-          if [[ -n "$(git status --porcelain _data/scholar_stats.yml)" ]]; then
+          if [[ -n "$(git status --porcelain _data/scholar_stats.yml _data/citations.yml)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add _data/scholar_stats.yml
+            git add _data/scholar_stats.yml _data/citations.yml
             git commit -m "chore: update Google Scholar stats"
             git push
             echo "changed=true" >> "$GITHUB_OUTPUT"

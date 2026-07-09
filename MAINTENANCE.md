@@ -11,6 +11,7 @@
 3. [项目文件结构说明](#3-项目文件结构说明)
 4. [发布到线上](#4-发布到线上)
 5. [常见问题](#5-常见问题)
+6. [引用次数是怎么更新的](#6-引用次数是怎么更新的)
 
 ---
 
@@ -199,6 +200,8 @@ docker compose up -d --build   # 改了 Dockerfile / Gemfile 后强制重建
 | `cv.yml` | CV 页面的结构化数据（如果 cv.md 用数据模式）|
 | `venues.yml` | 期刊/会议的全名到缩写映射（显示 abbr 徽章）|
 | `presentations.yml` | **会议报告数据**（你主要更新的文件之一）|
+| `scholar_stats.yml` | 总引用数 / h-index / i10-index，**CI 自动生成，勿手改** |
+| `citations.yml` | 每篇论文的引用数，**CI 自动生成，勿手改** |
 
 ### `assets/` — 静态资源
 
@@ -249,7 +252,7 @@ docker compose up -d --build   # 改了 Dockerfile / Gemfile 后强制重建
 
 **坑二：远端有机器人提交。**
 
-GitHub Actions 会定期推 `chore: update Google Scholar stats`（改 `_data/scholar_stats.yml`）。所以 `git push` 经常被拒（`! [rejected] ... fetch first`）。
+GitHub Actions 每天会推 `chore: update Google Scholar stats`（改 `_data/scholar_stats.yml` 和 `_data/citations.yml`）。所以 `git push` 经常被拒（`! [rejected] ... fetch first`）。详见 [6. 引用次数是怎么更新的](#6-引用次数是怎么更新的)。
 
 ### 常规流程
 
@@ -269,7 +272,7 @@ git push origin master
 ```
 
 > `Gemfile.lock` 已被 skip-worktree 忽略（见下），不会再混进来。
-> 但 `_bibliography/papers.bib` 和 `_data/citations.yml` 会被 `_plugins/` 里的引用抓取插件自动改写，`git add` 前先 `git diff` 扫一眼——这些改动通常是真实的元数据更新（比如 `volume = {in press}` 变成实际卷号），值得提交。
+> `_data/scholar_stats.yml` 和 `_data/citations.yml` 由 CI 每日自动生成并提交，本地不要手改，也不用 `git add`（见 [6. 引用次数是怎么更新的](#6-引用次数是怎么更新的)）。
 
 几分钟后 <https://xinwuchn.github.io> 自动刷新。在 GitHub 仓库的 Actions 标签页可查看部署进度。
 
@@ -371,6 +374,53 @@ docker compose restart site
    ---
    ```
 3. 正文用 Markdown + Liquid 编写
+
+---
+
+## 6. 引用次数是怎么更新的
+
+一句话：**每天 UTC 06:00，CI 抓一次你的 Google Scholar 主页，同时更新总指标和每篇论文的引用数。本地构建完全不联网。**
+
+### 数据流
+
+```
+Google Scholar 主页
+  └─ scripts/fetch_scholar_stats.py   （每天由 CI 跑一次）
+       ├─ _data/scholar_stats.yml     总引用数 / h-index / i10-index
+       │    └─ _pages/publications.md 页面顶部的统计卡片
+       └─ _data/citations.yml         每篇引用数，键为 google_scholar_id
+            └─ _layouts/bib.liquid    论文条目上的 Citations 徽章
+```
+
+一次 HTTP 请求同时拿到两样东西，因为 Scholar 主页本来就同时列出总指标和文章列表。
+
+### 关键约定
+
+- **`_bibliography/papers.bib` 里每条论文的 `google_scholar_id` 必须正确**，否则引用数对不上号。这个 ID 是 Scholar 文章链接里 `citation_for_view=<用户ID>:<文章ID>` 的后半段
+- 引用数为 0 的论文不显示 Citations 徽章
+- 两个 `_data/*.yml` 都是**自动生成的**，开头有 `do not edit by hand` 注释。本地不要改，也不要 `git add`
+- 抓取失败（Scholar 限流）时脚本返回非零且**不覆盖任何文件**，保留上一次的值。workflow 里 `continue-on-error: true`，所以不会让 CI 变红
+
+### 控制点
+
+| 想做什么 | 改哪里 |
+|---|---|
+| 改抓取频率 | `.github/workflows/update-scholar-stats.yml` 的 `cron: '0 6 * * *'` |
+| 立刻手动抓一次 | GitHub 仓库 Actions 页面 → Update Google Scholar stats → Run workflow |
+| 本地试跑（会覆盖数据文件）| `python3 scripts/fetch_scholar_stats.py` |
+| 本地试跑但不覆盖 | `SCHOLAR_STATS_PATH=/tmp/a.yml SCHOLAR_CITES_PATH=/tmp/b.yml python3 scripts/fetch_scholar_stats.py` |
+| 换 Scholar 账号 | workflow 里的 `SCHOLAR_USERID` **和** `_config.yml` 的 `scholar_userid`，两处都要改 |
+
+### 机器人提交
+
+抓到变化时，CI 会以 `github-actions[bot]` 身份提交 `chore: update Google Scholar stats` 并推到 `master`。这就是你 `git push` 偶尔被拒的原因，处理见 [4. 发布到线上](#4-发布到线上)。
+
+因为用 `GITHUB_TOKEN` 推的提交不会触发其他 workflow，它还会显式调用 `gh workflow run deploy.yml` 重新部署站点。
+
+### 已废弃的机制
+
+- `_plugins/semantic-scholar-citations.rb`（**已删除**）：原先在构建时从 Semantic Scholar API 抓单篇引用数。数据源和 Google Scholar 不一致，且会和 CI 争抢改写 `_data/citations.yml`
+- `_config.yml` 的 `enable_publication_badges.google_scholar`（**保持 `false`**）：对应 `_plugins/google-scholar-citations.rb`，那是直接爬 Scholar 页面的老方案，容易被 429 限流
 
 ---
 
