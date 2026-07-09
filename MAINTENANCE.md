@@ -16,19 +16,40 @@
 
 ## 1. 快速启动本地预览
 
-```bash
-# 首次构建镜像（已构建过可跳过）
-docker build -t xinwuchn-site .
+需要一个 Docker daemon。本机用 **OrbStack**（比 Docker Desktop 省内存、启动快）：
 
-# 启动本地服务，挂载当前目录实现热重载
-docker run --rm -p 8080:8080 -v "$PWD:/srv/jekyll" xinwuchn-site
+```bash
+open -a OrbStack            # 启动，等菜单栏图标就绪
+docker context use orbstack # 一次性设置，之后持久生效
 ```
 
-浏览器访问 <http://localhost:8080> 即可。`Ctrl-C` 停止容器。
+> OrbStack 设置 → General 勾选 "Start at login" 可省掉第一步。
+> 想换回 Docker Desktop：`docker context use desktop-linux`（注意两者镜像存储独立，切换后需重新构建）。
 
-- **源文件改动**（`_pages/`、`_posts/` 等）会自动触发增量重建
-- **`_config.yml` 改动** 不会热加载，**必须重启容器**
-- **`_data/` 目录下的 YAML 改动**在 Docker on macOS 下 watcher 可能捕捉不到，此时 `touch` 任一 `_pages/*.md` 强制重建，或直接重启容器
+### 方式一：VSCode Container Tools 扩展（推荐）
+
+装扩展 `ms-azuretools.vscode-containers`，然后：
+
+1. 右键 `compose.yaml` → **Compose Up**（首次会自动构建镜像）
+2. 浏览器访问 <http://localhost:8080>
+3. 收工：侧边栏鲸鱼图标 → Containers → 右键容器 → **Compose Down**
+
+侧边栏里右键容器还能 `View Logs` 看 Jekyll 构建输出和报错，`Attach Shell` 进容器调试。
+
+> 不要用镜像上的 `Run` / `Run Interactive`——它不带端口映射和目录挂载，容器起来了也访问不到。只有 Compose Up 才会读 `compose.yaml` 里的完整参数。
+
+### 方式二：命令行
+
+```bash
+docker compose up          # 首次自动构建；Ctrl-C 停止
+docker compose up -d --build   # 改了 Dockerfile / Gemfile 后强制重建
+```
+
+### 热重载行为
+
+- **源文件改动**（`_pages/`、`_posts/`、`_data/` 等）自动触发增量重建，浏览器**自动刷新**（livereload 走 35729 端口，已在 `compose.yaml` 里映射）
+- **`_config.yml` 改动**也会自动重启 Jekyll——`bin/entry_point.sh` 里有个 `inotifywait` 循环盯着它。重启约需十几秒，看容器日志确认
+- 极少数情况下 watcher 漏事件，`touch` 任一 `_pages/*.md` 强制重建，或 Compose Down 再 Up
 
 ---
 
@@ -124,7 +145,7 @@ docker run --rm -p 8080:8080 -v "$PWD:/srv/jekyll" xinwuchn-site
 
 ### 2.8 开关站点功能
 
-编辑 `_config.yml` 后 **必须重启容器**。常用开关：
+编辑 `_config.yml` 后容器会**自动重启 Jekyll**，等十几秒生效。常用开关：
 
 | 选项 | 作用 |
 |---|---|
@@ -146,6 +167,7 @@ docker run --rm -p 8080:8080 -v "$PWD:/srv/jekyll" xinwuchn-site
 |---|---|---|
 | `_config.yml` | **站点全局配置**：标题、作者信息、导航、插件开关、Giscus、社交链接、Scholar ID 等 | 偶尔改 |
 | `Dockerfile` | Docker 镜像构建定义（Ruby + Jekyll + ImageMagick） | 基本不动 |
+| `compose.yaml` | 本地预览的容器编排（端口映射 + 目录挂载） | 基本不动 |
 | `Gemfile` / `Gemfile.lock` | Ruby 依赖声明和锁定版本 | 加插件时改 |
 | `package.json` / `package-lock.json` | 少量 npm 工具（purgecss 等） | 基本不动 |
 | `purgecss.config.js` | 生产构建时清理无用 CSS 的配置 | 基本不动 |
@@ -239,10 +261,13 @@ touch _pages/teaching.md
 
 ### Q: 改了 `_config.yml` 没效果？
 
-`_config.yml` **不会**热重载，必须重启容器：
+正常情况下 `bin/entry_point.sh` 会检测到并自动重启 Jekyll，等十几秒即可。先看日志确认：
 ```bash
-docker stop $(docker ps -q --filter ancestor=xinwuchn-site)
-docker run --rm -p 8080:8080 -v "$PWD:/srv/jekyll" xinwuchn-site
+docker compose logs -f site   # 应出现 "Change detected to _config.yml, restarting Jekyll"
+```
+没出现就手动重启：
+```bash
+docker compose restart site
 ```
 
 ### Q: 构建报 `Could not locate the included file 'xxx.md'`？
@@ -255,7 +280,12 @@ docker run --rm -p 8080:8080 -v "$PWD:/srv/jekyll" xinwuchn-site
 
 ### Q: 首次构建很慢？
 
-首次会编译 ImageMagick 生成所有响应式图片，约 100 秒。之后有缓存，一般 7–10 秒。
+分两层：
+
+- **镜像构建**（装 Ruby gems 和 ImageMagick）首次几分钟，之后走 Docker 层缓存，除非改了 `Dockerfile` / `Gemfile`
+- **Jekyll 站点构建**首次要生成所有响应式图片，约 100 秒。之后有 `.jekyll-cache/` 缓存，一般 7–10 秒
+
+`_site/` 和 `.jekyll-cache/` 挂载在宿主机上，Compose Down 也不会丢，所以重开容器通常十几秒就能访问。
 
 ### Q: 想添加新的顶层页面？
 
@@ -274,4 +304,4 @@ docker run --rm -p 8080:8080 -v "$PWD:/srv/jekyll" xinwuchn-site
 
 ---
 
-_最后更新：2026-04-15_
+_最后更新：2026-07-09_

@@ -1,0 +1,9 @@
+services:
+  site:
+    build: .
+    image: xinwuchn-site
+    ports:
+      - "8080:8080"
+      - "35729:35729" # jekyll livereload
+    volumes:
+      - .:/srv/jekyll

@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(xargs -I{} docker logs {})"
+      "Bash(xargs -I{} docker logs {})",
+      "Bash(ls ~/.vscode/extensions 2>/dev/null | grep -i -E \"docker|container\" ; echo \"--- app ---\"; ls /Applications | grep -i -E \"docker|orbstack|rancher\")",
+      "Read(//Users/walfrey/.vscode/extensions/**)",
+      "Read(//Applications/**)",
+      "Bash(docker system *)"
     ]
   }
 }
