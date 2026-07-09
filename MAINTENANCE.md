@@ -168,7 +168,8 @@ docker compose up -d --build   # 改了 Dockerfile / Gemfile 后强制重建
 | `_config.yml` | **站点全局配置**：标题、作者信息、导航、插件开关、Giscus、社交链接、Scholar ID 等 | 偶尔改 |
 | `Dockerfile` | Docker 镜像构建定义（Ruby + Jekyll + ImageMagick） | 基本不动 |
 | `compose.yaml` | 本地预览的容器编排（端口映射 + 目录挂载） | 基本不动 |
-| `Gemfile` / `Gemfile.lock` | Ruby 依赖声明和锁定版本 | 加插件时改 |
+| `Gemfile` | Ruby 依赖声明 | 加插件时改 |
+| `Gemfile.lock` | 依赖锁定版本。**容器会重写它，不要提交**，见 [4. 发布到线上](#4-发布到线上) | 不要动 |
 | `package.json` / `package-lock.json` | 少量 npm 工具（purgecss 等） | 基本不动 |
 | `purgecss.config.js` | 生产构建时清理无用 CSS 的配置 | 基本不动 |
 | `robots.txt` | 搜索引擎爬虫规则 | 基本不动 |
@@ -236,16 +237,85 @@ docker compose up -d --build   # 改了 Dockerfile / Gemfile 后强制重建
 
 `.github/workflows/deploy.yml` 会在你 `git push` 到 `master` 分支时自动构建并部署到 GitHub Pages。
 
-常规流程：
+### ⚠️ 两个必须知道的坑
+
+**坑一：`Gemfile.lock` 会被容器改坏，绝对不能提交。**
+
+`bin/entry_point.sh` 每次启动都 `rm -f Gemfile.lock` 再让 Jekyll 重新生成，而容器里只有 `aarch64-linux-gnu` 一个平台。生成出来的 lock 文件会**丢掉 `x86_64-linux`**（GitHub Actions runner 的平台）**和 `arm64-darwin`**，还会静默升级 nokogiri、sass-embedded 等 gem 的版本。
+
+一旦提交，CI 的 `bundle install` 很可能因为锁文件不含 runner 平台而直接报错；即使侥幸装上，用的也是一批没在本地测过的 gem 版本。**风险是线上部署挂掉，而你本地一切正常。**
+
+> 注意：`Gemfile.lock` 虽然写在 `.gitignore` 里，但它是**被跟踪的文件**，`.gitignore` 对已跟踪文件无效。所以 `git add .` 照样会把它带上——这就是为什么下面不用 `git add .`。
+
+**坑二：远端有机器人提交。**
+
+GitHub Actions 会定期推 `chore: update Google Scholar stats`（改 `_data/scholar_stats.yml`）。所以 `git push` 经常被拒（`! [rejected] ... fetch first`）。
+
+### 常规流程
 
 ```bash
-# 本地预览确认无误后
-git add .
+# 1. 本地预览确认无误后，先看清楚要提交什么
+git status
+
+# 2. 逐个添加，不要用 git add .
+git add _pages/ _posts/ _news/ _bibliography/ _data/ assets/
 git commit -m "update: ..."
+
+# 3. 拉取远端机器人提交并变基（机器人只动 scholar_stats.yml，不会冲突）
+git pull --rebase origin master
+
+# 4. 推送
 git push origin master
 ```
 
+> `Gemfile.lock` 已被 skip-worktree 忽略（见下），不会再混进来。
+> 但 `_bibliography/papers.bib` 和 `_data/citations.yml` 会被 `_plugins/` 里的引用抓取插件自动改写，`git add` 前先 `git diff` 扫一眼——这些改动通常是真实的元数据更新（比如 `volume = {in press}` 变成实际卷号），值得提交。
+
 几分钟后 <https://xinwuchn.github.io> 自动刷新。在 GitHub 仓库的 Actions 标签页可查看部署进度。
+
+### 推送被拒怎么办
+
+```bash
+git status                        # 确认工作区干净
+git pull --rebase origin master   # 把你的提交挪到远端提交之上
+git push origin master
+```
+
+如果 rebase 报冲突（罕见，只有你也改了 `_data/scholar_stats.yml` 时才会），直接采用远端版本：
+
+```bash
+git checkout --theirs _data/scholar_stats.yml
+git add _data/scholar_stats.yml
+git rebase --continue
+```
+
+### Gemfile.lock 的本地改动已被忽略
+
+本工作副本已执行过：
+
+```bash
+git update-index --skip-worktree Gemfile.lock
+```
+
+所以容器怎么改它 `git status` 都不会显示，`git add .` 也带不上，上面流程里的第 1 步可以省。用 `git ls-files -v Gemfile.lock` 确认，输出开头是 `S` 就是生效状态。
+
+> **这是本地索引标志，不随仓库走。** 换台电脑或重新 clone 之后要再执行一次。
+
+**副作用**：将来远端如果真的更新了 `Gemfile.lock`（比如你改了 `Gemfile` 加插件），`git pull` 会报错拒绝覆盖。那时先撤销再拉：
+
+```bash
+git update-index --no-skip-worktree Gemfile.lock
+git checkout -- Gemfile.lock
+git pull
+```
+
+### 不该提交的文件
+
+| 文件 | 原因 |
+|---|---|
+| `Gemfile.lock` | 容器每次启动重新生成，平台信息会丢失（见上） |
+| `.claude/settings.local.json` | 本机私有的 Claude Code 配置，与站点无关 |
+| `_site/` `.jekyll-cache/` `node_modules/` | 构建产物，已正确 gitignore |
 
 ---
 
