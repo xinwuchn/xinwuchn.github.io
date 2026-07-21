@@ -2,9 +2,11 @@ name: Update Google Scholar stats
 
 on:
   schedule:
-    # Every day at 06:00 UTC. Scholar may rate-limit; the script fails safe and
-    # keeps the last-known-good values when a fetch is blocked.
-    - cron: '0 6 * * *'
+    # Twice a day, on odd minutes: GitHub delays scheduled runs the most at the
+    # top of the hour, and a second attempt costs nothing if the first is
+    # blocked by Scholar. The script keeps last-known-good values either way.
+    - cron: '23 3 * * *'
+    - cron: '47 15 * * *'
   workflow_dispatch:
 
 permissions:
@@ -29,10 +31,15 @@ jobs:
 
       - name: Fetch profile metrics and per-article citations 📊
         id: fetch
-        continue-on-error: true
+        # Deliberately NOT continue-on-error: a blocked fetch leaves the data
+        # files untouched, which is indistinguishable from "nothing changed".
+        # Letting the job go red is the only signal that the data has gone stale.
         env:
           # Mirrors scholar_userid in _config.yml
           SCHOLAR_USERID: CF7dea8AAAAJ
+          # Optional. Set this repository secret to fall back to SerpAPI when
+          # Google Scholar blocks the runner's datacenter IP.
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
         run: python3 scripts/fetch_scholar_stats.py
 
       - name: Commit if changed 💾
