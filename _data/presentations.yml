@@ -17,6 +17,18 @@
 # Add newest entries first — the page sorts by date (desc) automatically.
 # Uncomment and edit the template below to add your first entry.
 
+- type: contributed
+  title: "High thermal anisotropy in Janus MoSSe stacks via data-driven flipping engineering"
+  conference: "The 37th International Conference on the Physics of Semiconductors (ICPS 2026)"
+  location: "Tokyo 🇯🇵"
+  date: 2026-08-20
+  year: 2026
+  lat: 35.6899
+  lng: 139.6944
+  url: https://icps2026.jp
+  authors: "Xin Wu, Masahiro Nomura"
+
+
 - type: invited
   title: "Flipping engineering: Data-driven strategy for high thermal anisotropy in MoSSe stacks"
   conference: "The 32nd International Conference on Computational & Experimental Engineering and Sciences (ICCES 2026)"
