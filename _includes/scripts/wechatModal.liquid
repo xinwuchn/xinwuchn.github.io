@@ -1,18 +1,23 @@
 {% if site.wechat_qr %}
   <!-- WeChat Modal -->
-
   <script>
-    var wechatModal = document.getElementById('WeChatMod');
-    var wechatBtn = document.getElementById('WeChatBtn');
-
-    wechatBtn.onclick = function () {
-      wechatModal.style.display = 'block';
-    };
-
-    window.onclick = function (event) {
-      if (event.target == wechatModal) {
-        wechatModal.style.display = 'none';
-      }
-    };
+    (function () {
+      const modal = document.getElementById('WeChatMod');
+      const trigger = document.getElementById('WeChatBtn');
+      if (!modal || !trigger || trigger.dataset.modalReady) return;
+      trigger.dataset.modalReady = 'true';
+      trigger.onclick = function () {
+        modal.style.display = 'block';
+      };
+      modal.onclick = function (event) {
+        if (event.target === modal) modal.style.display = 'none';
+      };
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && modal.style.display === 'block') {
+          modal.style.display = 'none';
+          trigger.focus();
+        }
+      });
+    })();
   </script>
 {% endif %}

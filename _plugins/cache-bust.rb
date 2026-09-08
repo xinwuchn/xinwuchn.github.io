@@ -43,7 +43,14 @@ module Jekyll
     end
 
     def bust_css_cache(file_name)
-      CacheDigester.new(file_name: file_name, directory: 'assets/_sass').digest!
+      # Hash the actual Sass sources and configuration, not the legacy
+      # assets/_sass directory. Otherwise every build gets the empty MD5 hash
+      # and returning visitors can keep seeing an older stylesheet.
+      source = @context.registers[:site].source
+      inputs = Dir[File.join(source, '_sass', '**', '*.scss')].sort
+      inputs += [File.join(source, 'assets/css/main.scss'), File.join(source, '_config.yml')]
+      digest = Digest::MD5.hexdigest(inputs.map { |path| File.read(path) }.join)
+      "#{file_name}?#{digest}"
     end
   end
 end

@@ -10,95 +10,15 @@ nav_order: 3
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-<style>
-  .presentations .year-heading {
-    margin-top: 1.5rem;
-    padding-bottom: 0.25rem;
-    border-bottom: 1px solid var(--global-divider-color);
-  }
-  .presentations .talk {
-    padding: 1rem 0 1rem 0.9rem;
-    border-left: 3px solid transparent;
-    border-bottom: 1px dashed var(--global-divider-color);
-  }
-  .presentations .talk:last-child { border-bottom: none; }
-  .presentations .talk-title {
-    font-weight: 600;
-    font-size: 1.05rem;
-    margin: 0.2rem 0;
-  }
-  .presentations .talk-meta {
-    color: var(--global-text-color-light);
-    font-size: 0.92rem;
-  }
-  .presentations .talk-authors {
-    font-size: 0.9rem;
-    color: var(--global-text-color-light);
-  }
-  .presentations .talk-abstract {
-    font-size: 0.9rem;
-    margin-top: 0.3rem;
-  }
-  .presentations .badge-type {
-    display: inline-block;
-    padding: 0.2em 0.6em;
-    border-radius: 0.3em;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #fff;
-    margin-right: 0.4rem;
-    vertical-align: 2px;
-  }
-  .presentations .badge-invited      { background: #b31b1b; }
-  .presentations .badge-contributed  { background: #0d6efd; }
-  .presentations .badge-poster       { background: #6c757d; }
-  .presentations .talk-invited {
-    background: rgba(179, 27, 27, 0.04);
-    border-left-color: #b31b1b;
-  }
-  .presentations .talk-links a {
-    font-size: 0.85rem;
-    margin-right: 0.6rem;
-  }
-  .pin-marker { background: transparent; border: none; }
-  .pin-marker svg {
-    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.35));
-    transition: transform 0.15s ease;
-  }
-  .pin-marker:hover svg { transform: translateY(-2px) scale(1.08); }
-  #presentations-map {
-    height: 380px;
-    width: 100%;
-    margin-bottom: 1.5rem;
-    border-radius: 8px;
-    border: 1px solid var(--global-divider-color);
-  }
-  .map-legend {
-    font-size: 0.85rem;
-    color: var(--global-text-color-light);
-    margin: -1rem 0 1rem 0;
-  }
-  .map-legend .dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin: 0 0.25rem 0 0.75rem;
-    vertical-align: middle;
-  }
-</style>
-
 <div class="presentations">
 
 {% if site.data.presentations and site.data.presentations != empty %}
 
 <div id="presentations-map"></div>
 <div class="map-legend">
-  <span class="dot" style="background:#b31b1b"></span>Invited
-  <span class="dot" style="background:#0d6efd"></span>Talk
-  <span class="dot" style="background:#6c757d"></span>Poster
+  <span class="dot" style="background:#88644c"></span>Invited
+  <span class="dot" style="background:#365d74"></span>Talk
+  <span class="dot" style="background:#727a80"></span>Poster
 </div>
 
 <script>
@@ -111,7 +31,7 @@ nav_order: 3
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     maxZoom: 19
   }).addTo(map);
-  const colorMap = { invited: '#b31b1b', contributed: '#0d6efd', poster: '#6c757d' };
+  const colorMap = { invited: '#88644c', contributed: '#365d74', poster: '#727a80' };
   const typeRank = { invited: 0, contributed: 1, poster: 2 };
   function pinIcon(color, count) {
     const gid = 'g-' + color.replace('#','');
@@ -160,8 +80,12 @@ nav_order: 3
       return (b.date || '').toString().localeCompare((a.date || '').toString());
     });
     const dominant = g.items[0].type;
-    const color = colorMap[dominant] || '#0d6efd';
-    const marker = L.marker([g.lat, g.lng], { icon: pinIcon(color, g.items.length) }).addTo(map);
+    const color = colorMap[dominant] || '#365d74';
+    const marker = L.marker([g.lat, g.lng], {
+      icon: pinIcon(color, g.items.length),
+      title: g.items[0].location,
+      alt: g.items[0].location
+    }).addTo(map);
     let html = '';
     if (g.items.length > 1) {
       html += '<div style="font-weight:600;margin-bottom:6px;color:#555;">' +
@@ -169,7 +93,7 @@ nav_order: 3
     }
     g.items.forEach(function (t, i) {
       const dateStr = (t.date || '').toString().substring(0, 7);
-      const badgeColor = colorMap[t.type] || '#0d6efd';
+      const badgeColor = colorMap[t.type] || '#365d74';
       const badgeText = t.type === 'invited' ? 'Invited' : (t.type === 'poster' ? 'Poster' : 'Talk');
       if (i > 0) html += '<hr style="margin:6px 0;border:none;border-top:1px dashed #ddd;">';
       html +=
@@ -191,6 +115,7 @@ nav_order: 3
 {% assign years = sorted | map: "year" | uniq %}
 
 {% for year in years %}
+
   <h2 class="year-heading">{{ year }}</h2>
   {% assign items = sorted | where: "year", year %}
   {% for t in items %}

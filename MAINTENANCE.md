@@ -109,7 +109,7 @@ docker compose up -d --build   # 改了 Dockerfile / Gemfile 后强制重建
     authors: "Xin Wu, Collaborator"    # 可选，"Xin Wu" 自动加下划线
     abstract: "One-line summary."      # 可选
   ```
-- **Invited 报告会被加红色竖条和浅红背景加强显示**
+- **Invited 报告使用低饱和棕色标签与细竖线标识**
 - 页面顶部有一张 **世界地图**，按 `lat`/`lng` 显示参会位置，按类型着色。坐标可从 [latlong.net](https://www.latlong.net/) 或 Google Maps 右键获取
 - Slides PDF 放 `assets/pdf/talks/`（按需 `mkdir`）
 
@@ -425,3 +425,18 @@ Google Scholar 主页
 ---
 
 _最后更新：2026-07-09_
+
+
+## 7. 视觉样式维护（2026-09）
+
+- 全站视觉样式集中在 `_sass/_academic.scss`，报告地图的基础样式在 `_sass/_presentations.scss`，由 `assets/css/main.scss` 引入。
+- 字体使用系统无衬线正文与 Georgia 衬线标题，中文有系统字体回退；不依赖 Google Fonts 下载正文字体。
+- 博客正文的阅读栏限制为 780px，与宽幅论文列表分开设置，避免大屏上一行文字过长。
+- 桌面（≥992px）采用 18px 正文基准（`html: 112.5%`），首页导语约 21px，论文标题约 20px，作者信息约 17px；辅助文字使用较深灰色，避免细字与低对比度叠加。
+- 浅色 / 深色的配色变量位于 `_academic.scss` 顶部；正文宽度由 `_config.yml` 的 `max_width` 控制。
+- 首页布局在 `_layouts/about.liquid`：姓名与职位、照片和学术链接、简介 / 研究方向 / 背景、News。职位与机构分别在 `_pages/about.md` 的 `subtitle` 和 `affiliation` 中维护。
+- 导航在所有页面统一显示姓名。页脚跟随内容，不再固定在屏幕底部。
+- 博客顶部的标签和分类入口由 `_config.yml` 的 `display_tags` / `display_categories` 控制，仅添加已有文章的标签和分类，避免链接到未生成的归档。
+- 论文统计仍由原有数据文件生成，筛选按钮会同步 `aria-pressed` 状态；论文、报告、CV 的原始数据无需为样式调整而改写。
+- 样式缓存标识由 `_plugins/cache-bust.rb` 根据 `_sass/`、`assets/css/main.scss` 与 `_config.yml` 内容生成，修改样式后浏览器会请求新版本 CSS。
+- 修改后继续使用 `docker compose up -d`，访问 <http://localhost:8080>。检查桌面、手机窄屏和深色模式；页面重建约需数秒。

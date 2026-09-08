@@ -5,7 +5,7 @@ title: CV
 nav: true
 nav_order: 4
 cv_pdf: my_cv.pdf
-description: This is Xin 👋. You can also find and download the PDF version by clicking that button. ☞
+description: Academic appointments, education, and research experience.
 toc:
   sidebar: left
 ---

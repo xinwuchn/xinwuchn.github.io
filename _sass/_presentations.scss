@@ -1,0 +1,90 @@
+.presentations .year-heading {
+  margin-top: 1.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--global-divider-color);
+}
+.presentations .talk {
+  padding: 1rem 0 1rem 0.9rem;
+  border-left: 3px solid transparent;
+  border-bottom: 1px dashed var(--global-divider-color);
+}
+.presentations .talk:last-child {
+  border-bottom: none;
+}
+.presentations .talk-title {
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 0.2rem 0;
+}
+.presentations .talk-meta {
+  color: var(--global-text-color-light);
+  font-size: 0.92rem;
+}
+.presentations .talk-authors {
+  font-size: 0.9rem;
+  color: var(--global-text-color-light);
+}
+.presentations .talk-abstract {
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+.presentations .badge-type {
+  display: inline-block;
+  padding: 0.2em 0.6em;
+  border-radius: 0.3em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-right: 0.4rem;
+  vertical-align: 2px;
+}
+.presentations .badge-invited {
+  background: #b31b1b;
+}
+.presentations .badge-contributed {
+  background: #0d6efd;
+}
+.presentations .badge-poster {
+  background: #6c757d;
+}
+.presentations .talk-invited {
+  background: rgba(179, 27, 27, 0.04);
+  border-left-color: #b31b1b;
+}
+.presentations .talk-links a {
+  font-size: 0.85rem;
+  margin-right: 0.6rem;
+}
+.pin-marker {
+  background: transparent;
+  border: none;
+}
+.pin-marker svg {
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
+  transition: transform 0.15s ease;
+}
+.pin-marker:hover svg {
+  transform: translateY(-2px) scale(1.08);
+}
+#presentations-map {
+  height: 380px;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--global-divider-color);
+}
+.map-legend {
+  font-size: 0.85rem;
+  color: var(--global-text-color-light);
+  margin: -1rem 0 1rem 0;
+}
+.map-legend .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 0 0.25rem 0 0.75rem;
+  vertical-align: middle;
+}

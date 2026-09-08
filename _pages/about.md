@@ -2,7 +2,8 @@
 layout: about
 title: About
 permalink: /
-subtitle: Project Research Associate @ The University of Tokyo
+subtitle: Project Research Associate
+affiliation: The University of Tokyo
 
 profile:
   align: right
@@ -24,15 +25,15 @@ in semiconductors, energy materials, two-dimensional materials, and their
 heterostructures, where nanoscale heat transfer plays a critical role in device
 performance, reliability, and safety.
 
-**Research interests:** AI for science · 2D, semiconductor, energy materials · 
-nanoscale heat transfer · machine-learned interatomic potentials · quantum 
-chemistry & first-principles calculations
+## Research interests
+
+- AI for science & machine-learned interatomic potentials
+- Nanoscale heat transfer & thermal management
+- 2D, semiconductor & energy materials
+- Quantum chemistry & first-principles calculations
+
+## Background
 
 I received my PhD in Solid Mechanics from the South China University of
-Technology (SCUT) in 2023, advised by Prof. Qiang Han. Along the way, I spent a
-year as a visiting Ph.D. researcher at the Institute of Industrial Science, the
-University of Tokyo, working with Prof. Masahiro Nomura — an experience that
-shaped much of how I think about this field.
-
-> This site is where I share my work, thoughts, and occasional notes from the
-> research trenches. Feel free to look around, and don't hesitate to reach out! 🤗
+Technology (SCUT) in 2023, advised by Prof. Qiang Han. I also spent a
+year as a visiting PhD researcher at the Institute of Industrial Science, The University of Tokyo, working with Prof. Masahiro Nomura.
