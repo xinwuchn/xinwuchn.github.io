@@ -1,1 +1,1 @@
-document.addEventListener("readystatechange",()=>{if("interactive"===document.readyState){let e=navigator.platform.toUpperCase().indexOf("MAC")>=0,t=document.querySelector("#search-toggle .nav-link");t&&e&&(t.innerHTML='&#x2318; k <i class="ti ti-search"></i>')}});
+document.addEventListener("DOMContentLoaded",()=>{const e=document.getElementById("search-toggle");if(e){const t=navigator.platform.toUpperCase().includes("MAC")?"\u2318 K":"Ctrl K";e.title=`Search (${t})`}});
