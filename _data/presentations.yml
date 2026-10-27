@@ -17,6 +17,18 @@
 # Add newest entries first — the page sorts by date (desc) automatically.
 # Uncomment and edit the template below to add your first entry.
 
+- type: invited
+  title: "Design and regulation of phonon thermal transport in two-dimensional materials through sequence design"
+  conference: "Beijing Graphene Forum 2026"
+  location: "Beijing 🇨🇳"
+  date: 2026-10-27
+  year: 2026
+  lat: 40.0904
+  lng: 116.1811
+  url: https://en.beijinggrapheneforum.com
+  authors: "Xin Wu, Masahiro Nomura"
+
+
 - type: contributed
   title: "High thermal anisotropy in Janus MoSSe stacks via data-driven flipping engineering"
   conference: "The 37th International Conference on the Physics of Semiconductors (ICPS 2026)"
